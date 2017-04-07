@@ -62,7 +62,7 @@ public class ProfileInfoFragment extends Fragment {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_profile_info, container, false);
         View view = binding.getRoot();
         binding.setVariable(BR.data, viewModel); //Why does it not generate the method?
-        viewModel.setName("aslfdal");
+        viewModel.name.set("aslfdal");
         return view;
     }
 
@@ -71,7 +71,6 @@ public class ProfileInfoFragment extends Fragment {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
         }
-        viewModel.setName("aslfdal");
     }
 
     @Override

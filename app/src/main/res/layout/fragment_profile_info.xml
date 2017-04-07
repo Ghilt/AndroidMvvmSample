@@ -1,23 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="mvvmtest.shouse.se.mvvmtest.ProfileInfoFragment">
 
     <data>
+
         <variable
             name="data"
             type="mvvmtest.shouse.se.mvvmtest.ProfileInfoViewModel" />
     </data>
 
 
-    <FrameLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/nameLabelTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="30dp"
+            android:text="@string/profile_name"
+            android:textSize="22sp" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/nameLabelTextView"
+            android:layout_marginLeft="10dp"
+            android:layout_toEndOf="@id/nameLabelTextView"
             android:inputType="textCapWords"
-            android:text="@{data.name}"/>
-    </FrameLayout>
+            android:text="@={data.name}" />
+<!--@={data.name}   The equal sign at the start enables two way data binding-->
+
+        <TextView
+            android:id="@+id/phoneLabelTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/nameLabelTextView"
+            android:layout_marginLeft="10dp"
+
+            android:layout_marginTop="30dp"
+            android:text="@string/profile_phone"
+            android:textSize="22sp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/phoneLabelTextView"
+            android:layout_marginLeft="10dp"
+            android:layout_toEndOf="@id/phoneLabelTextView"
+            android:inputType="number" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="button"
+            android:onClick="@{data::onButtonClick}"
+            android:layout_centerInParent="true"/>
+    </RelativeLayout>
 </layout>
