@@ -1,8 +1,8 @@
 package mvvmtest.shouse.se.mvvmtest;
 
 import android.databinding.BaseObservable;
-import android.databinding.Bindable;
 import android.databinding.ObservableField;
+import android.view.View;
 
 /**
  * Created by ani on 2017-04-07.
@@ -10,15 +10,10 @@ import android.databinding.ObservableField;
 
 public class ProfileInfoViewModel extends BaseObservable {
 
-    private ObservableField<String> name = new ObservableField<String>();
+    public ObservableField<String> name = new ObservableField<String>(); //Observed data bound field
 
-    @Bindable
-    public String getName() {
-        return name.get();
-    }
-
-    public void setName(String name){
-        this.name.set(name);
+    public void onButtonClick(View view) {
+        name.set("schduoo"); // WHY DOES THIS NOT SET THE VALUE?
     }
 
 }
