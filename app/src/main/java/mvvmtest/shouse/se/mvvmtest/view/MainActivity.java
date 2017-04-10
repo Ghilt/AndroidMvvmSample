@@ -1,5 +1,7 @@
-package mvvmtest.shouse.se.mvvmtest;
+package mvvmtest.shouse.se.mvvmtest.view;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -19,6 +21,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.TextView;
+
+import com.google.gson.Gson;
+
+import mvvmtest.shouse.se.mvvmtest.R;
+import mvvmtest.shouse.se.mvvmtest.model.User;
 
 public class MainActivity extends AppCompatActivity implements ProfileInfoFragment.OnFragmentInteractionListener {
 
@@ -142,7 +149,10 @@ public class MainActivity extends AppCompatActivity implements ProfileInfoFragme
         @Override
         public Fragment getItem(int position) {
             if(position == 0){
-                return ProfileInfoFragment.newInstance("Adam");
+                SharedPreferences prefs = getSharedPreferences(getPackageName(), Context.MODE_PRIVATE);
+                String userStringGson = prefs.getString(getString(R.string.prefs_key_user), null);
+                User user = new Gson().fromJson(userStringGson, User.class);
+                return ProfileInfoFragment.newInstance(user);
             }
             return PlaceholderFragment.newInstance(position + 1);
         }
@@ -157,7 +167,7 @@ public class MainActivity extends AppCompatActivity implements ProfileInfoFragme
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "SECTION 1";
+                    return getString(R.string.tab_title_profile);
                 case 1:
                     return "SECTION 2";
                 case 2:
