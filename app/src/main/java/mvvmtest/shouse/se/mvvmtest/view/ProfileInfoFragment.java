@@ -1,4 +1,4 @@
-package mvvmtest.shouse.se.mvvmtest;
+package mvvmtest.shouse.se.mvvmtest.view;
 
 import android.content.Context;
 import android.databinding.DataBindingUtil;
@@ -11,6 +11,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import mvvmtest.shouse.se.mvvmtest.BR;
+import mvvmtest.shouse.se.mvvmtest.R;
+import mvvmtest.shouse.se.mvvmtest.model.User;
+import mvvmtest.shouse.se.mvvmtest.viewmodel.ProfileInfoViewModel;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -21,9 +26,7 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class ProfileInfoFragment extends Fragment {
-    private static final String ARG_PARAM_NAME = "param_name";
-
-    private String name;
+    private static final String ARG_PARAM_USER = "param_user";
 
     private OnFragmentInteractionListener mListener;
     private ProfileInfoViewModel viewModel;
@@ -37,13 +40,13 @@ public class ProfileInfoFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param name Parameter 1.
+     * @param user Parameter 1.
      * @return A new instance of fragment ProfileInfoFragment.
      */
-    public static ProfileInfoFragment newInstance(String name) {
+    public static ProfileInfoFragment newInstance(User user) {
         ProfileInfoFragment fragment = new ProfileInfoFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM_NAME, name);
+        args.putSerializable(ARG_PARAM_USER, user);
         fragment.setArguments(args);
         return fragment;
     }
@@ -51,18 +54,18 @@ public class ProfileInfoFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        User user = null;
         if (getArguments() != null) {
-            name = getArguments().getString(ARG_PARAM_NAME);
+            user = (User) getArguments().getSerializable(ARG_PARAM_USER);
         }
-        viewModel = new ProfileInfoViewModel();
+        viewModel = new ProfileInfoViewModel(getContext(), user);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_profile_info, container, false);
         View view = binding.getRoot();
-        binding.setVariable(BR.data, viewModel); //Why does it not generate the method?
-        viewModel.name.set("aslfdal");
+        binding.setVariable(BR.viewModel, viewModel); //Why does it not generate the method?
         return view;
     }
 
