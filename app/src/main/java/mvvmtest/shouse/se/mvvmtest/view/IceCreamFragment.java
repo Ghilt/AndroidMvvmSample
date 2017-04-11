@@ -62,6 +62,20 @@ public class IceCreamFragment extends Fragment {
     private void addRandomIceCream() {
         viewModel.add(new IceCreamViewModel(new Gelato("Strawberry", false)));
         viewModel.add(new IceCreamViewModel(new Gelato("Pear-Cone 2000+", true)));
+        viewModel.add(new IceCreamViewModel(new Gelato("Extra bold diamond black sandwhich", true)));
+        viewModel.add(new IceCreamViewModel(new Gelato("Cornetto", false)));
+        viewModel.add(new IceCreamViewModel(new Gelato("Strawberry", false)));
+        viewModel.add(new IceCreamViewModel(new Gelato("Pear-Cone 2000+", true)));
+        viewModel.add(new IceCreamViewModel(new Gelato("Extra bold diamond black sandwhich", true)));
+        viewModel.add(new IceCreamViewModel(new Gelato("Cornetto", false)));
+        viewModel.add(new IceCreamViewModel(new Gelato("Strawberry", false)));
+        viewModel.add(new IceCreamViewModel(new Gelato("Pear-Cone 2000+", true)));
+        viewModel.add(new IceCreamViewModel(new Gelato("Extra bold diamond black sandwhich", true)));
+        viewModel.add(new IceCreamViewModel(new Gelato("Cornetto", false)));
+        viewModel.add(new IceCreamViewModel(new Gelato("Strawberry", false)));
+        viewModel.add(new IceCreamViewModel(new Gelato("Pear-Cone 2000+", true)));
+        viewModel.add(new IceCreamViewModel(new Gelato("Extra bold diamond black sandwhich", true)));
+        viewModel.add(new IceCreamViewModel(new Gelato("Cornetto", false)));
     }
 
     @Override

@@ -55,6 +55,7 @@ public class ProfileInfoFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRetainInstance(true);
         User user = null;
         if (getArguments() != null) {
             user = (User) getArguments().getSerializable(ARG_PARAM_USER);

@@ -15,21 +15,22 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="10dp"
         android:orientation="horizontal">
 
-
         <TextView
-            android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
             android:text="@{viewModel.name}"/>
 
         <ImageView
-            android:layout_weight="1"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="@{viewModel.hasGluten ? View.GONE : View.VISIBLE}"
-            android:src="@android:drawable/btn_star"/>
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:visibility="@{viewModel.hasGluten ? View.INVISIBLE : View.VISIBLE}"
+            android:src="@drawable/gelato_no_gluten"/>
 
     </LinearLayout>
 </layout>

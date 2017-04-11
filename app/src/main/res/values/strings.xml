@@ -10,6 +10,7 @@
     <string name="profile_save_button">Save</string>
 
     <string name="tab_title_profile">Profile</string>
+    <string name="tab_title_gelato">Gelato</string>
 
     <string name="prefs_key_user">Profile</string>
     <string name="prefs_key_ice_creams">IceCreams</string>

@@ -175,7 +175,7 @@ public class MainActivity extends AppCompatActivity implements ProfileInfoFragme
                 case 0:
                     return getString(R.string.tab_title_profile);
                 case 1:
-                    return "SECTION 2";
+                    return getString(R.string.tab_title_gelato);
                 case 2:
                     return "SECTION 3";
             }
