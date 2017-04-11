@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import mvvmtest.shouse.se.mvvmtest.BR;
 import mvvmtest.shouse.se.mvvmtest.R;
 import mvvmtest.shouse.se.mvvmtest.databinding.IceCreamListItemBinding;
-import mvvmtest.shouse.se.mvvmtest.viewmodel.IceCreamViewModel;
+import mvvmtest.shouse.se.mvvmtest.viewmodel.IceCreamRowViewModel;
 
 /**
  * Created by ani on 2017-04-10.
@@ -22,9 +22,9 @@ public class IceCreamAdapter extends RecyclerView.Adapter<IceCreamViewHolder> {
 
 
     private Context context;
-    private ArrayList<IceCreamViewModel> data;
+    private ArrayList<IceCreamRowViewModel> data;
 
-    public IceCreamAdapter(Context context, ArrayList<IceCreamViewModel> data) {
+    public IceCreamAdapter(Context context, ArrayList<IceCreamRowViewModel> data) {
         this.context = context;
         this.data = data;
     }

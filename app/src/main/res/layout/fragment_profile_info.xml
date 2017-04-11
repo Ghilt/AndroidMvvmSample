@@ -55,13 +55,12 @@
             android:inputType="number"/>
 
         <Button
+            style="@style/ButtonTheme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/phoneLabelTextView"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="30dp"
-            android:textColor="#fff"
-            android:background="@color/colorPrimaryDark"
             android:text= "@string/profile_save_button"
             android:onClick="@{viewModel::onSaveButtonClick}" />
     </RelativeLayout>
