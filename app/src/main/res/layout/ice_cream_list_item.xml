@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="mvvmtest.shouse.se.mvvmtest.viewmodel.IceCreamViewModel" />
+            type="mvvmtest.shouse.se.mvvmtest.viewmodel.IceCreamRowViewModel" />
     </data>
 
 
@@ -19,18 +19,26 @@
         android:orientation="horizontal">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_gravity="center_vertical"
             android:text="@{viewModel.name}"/>
 
         <ImageView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="30dp"
             android:layout_weight="1"
             android:visibility="@{viewModel.hasGluten ? View.INVISIBLE : View.VISIBLE}"
             android:src="@drawable/gelato_no_gluten"/>
+
+        <Button
+            style="@style/ButtonTheme"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="+"
+            android:onClick="@{viewModel::onPlusButtonClick}" />
 
     </LinearLayout>
 </layout>
