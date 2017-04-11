@@ -25,9 +25,10 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 
 import mvvmtest.shouse.se.mvvmtest.R;
+import mvvmtest.shouse.se.mvvmtest.databinding.IceCreamListItemBinding;
 import mvvmtest.shouse.se.mvvmtest.model.User;
 
-public class MainActivity extends AppCompatActivity implements ProfileInfoFragment.OnFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity implements ProfileInfoFragment.OnFragmentInteractionListener, IceCreamFragment.OnFragmentInteractionListener {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -148,13 +149,18 @@ public class MainActivity extends AppCompatActivity implements ProfileInfoFragme
 
         @Override
         public Fragment getItem(int position) {
-            if(position == 0){
-                SharedPreferences prefs = getSharedPreferences(getPackageName(), Context.MODE_PRIVATE);
-                String userStringGson = prefs.getString(getString(R.string.prefs_key_user), null);
-                User user = new Gson().fromJson(userStringGson, User.class);
-                return ProfileInfoFragment.newInstance(user);
+            switch (position) {
+                case 0:
+                    SharedPreferences prefs = getSharedPreferences(getPackageName(), Context.MODE_PRIVATE);
+                    String userStringGson = prefs.getString(getString(R.string.prefs_key_user), null);
+                    User user = new Gson().fromJson(userStringGson, User.class);
+                    return ProfileInfoFragment.newInstance(user); // having this info as inparameter to a fragment where you can change the information can lead to data loss if the fragment is killed and reinstated after data has changed
+                case 1:
+                    return IceCreamFragment.newInstance();
+                case 2:
+                    return PlaceholderFragment.newInstance(3);
             }
-            return PlaceholderFragment.newInstance(position + 1);
+            return null;
         }
 
         @Override

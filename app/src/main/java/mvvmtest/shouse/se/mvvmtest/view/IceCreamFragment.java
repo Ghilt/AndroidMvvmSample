@@ -1,53 +1,45 @@
 package mvvmtest.shouse.se.mvvmtest.view;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.util.ArrayList;
+
 import mvvmtest.shouse.se.mvvmtest.BR;
 import mvvmtest.shouse.se.mvvmtest.R;
-import mvvmtest.shouse.se.mvvmtest.databinding.FragmentProfileInfoBinding;
+import mvvmtest.shouse.se.mvvmtest.databinding.IceCreamListItemBinding;
+import mvvmtest.shouse.se.mvvmtest.model.Gelato;
 import mvvmtest.shouse.se.mvvmtest.model.User;
-import mvvmtest.shouse.se.mvvmtest.viewmodel.ProfileInfoViewModel;
+import mvvmtest.shouse.se.mvvmtest.viewmodel.IceCreamViewModel;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link ProfileInfoFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link ProfileInfoFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class ProfileInfoFragment extends Fragment {
-    private static final String ARG_PARAM_USER = "param_user";
+public class IceCreamFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
-    private ProfileInfoViewModel viewModel;
-    private FragmentProfileInfoBinding binding;
+    private ArrayList<IceCreamViewModel> viewModel;
+    private ViewDataBinding binding;
 
-    public ProfileInfoFragment() {
+    public IceCreamFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param user Parameter 1.
-     * @return A new instance of fragment ProfileInfoFragment.
-     */
-    public static ProfileInfoFragment newInstance(User user) {
-        ProfileInfoFragment fragment = new ProfileInfoFragment();
+    public static IceCreamFragment newInstance() {
+        IceCreamFragment fragment = new IceCreamFragment();
         Bundle args = new Bundle();
-        args.putSerializable(ARG_PARAM_USER, user);
         fragment.setArguments(args);
         return fragment;
     }
@@ -55,26 +47,33 @@ public class ProfileInfoFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        User user = null;
-        if (getArguments() != null) {
-            user = (User) getArguments().getSerializable(ARG_PARAM_USER);
+        SharedPreferences prefs = getContext().getSharedPreferences(getContext().getPackageName(), Context.MODE_PRIVATE);
+        viewModel = new ArrayList<>();
+        String iceCreamStringGson = prefs.getString(getString(R.string.prefs_key_ice_creams), null);
+        if(iceCreamStringGson != null){
+            ArrayList<Gelato> iceCreams = new Gson().fromJson(iceCreamStringGson, new TypeToken<ArrayList<Gelato>>(){}.getType());
+            for (Gelato iceCream: iceCreams){
+                viewModel.add(new IceCreamViewModel(iceCream));
+            }
         }
-        viewModel = new ProfileInfoViewModel(getContext(), user);
+        addRandomIceCream();
+    }
+
+    private void addRandomIceCream() {
+        viewModel.add(new IceCreamViewModel(new Gelato("Strawberry", false)));
+        viewModel.add(new IceCreamViewModel(new Gelato("Pear-Cone 2000+", true)));
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_profile_info, container, false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_ice_cream_list, container, false);
         View view = binding.getRoot();
-        binding.setViewModel(viewModel);
+
+        RecyclerView recyclerView = ((RecyclerView) view.findViewById(R.id.iceCreamListView));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setAdapter(new IceCreamAdapter(getContext(), viewModel));
+//        recyclerView.setItemAnimator(new DefaultItemAnimator());
         return view;
-    }
-
-
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
     }
 
     @Override
