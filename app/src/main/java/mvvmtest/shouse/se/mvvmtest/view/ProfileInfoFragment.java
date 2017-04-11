@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 
 import mvvmtest.shouse.se.mvvmtest.BR;
 import mvvmtest.shouse.se.mvvmtest.R;
+import mvvmtest.shouse.se.mvvmtest.databinding.FragmentProfileInfoBinding;
 import mvvmtest.shouse.se.mvvmtest.model.User;
 import mvvmtest.shouse.se.mvvmtest.viewmodel.ProfileInfoViewModel;
 
@@ -30,7 +31,7 @@ public class ProfileInfoFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
     private ProfileInfoViewModel viewModel;
-    private ViewDataBinding binding;
+    private FragmentProfileInfoBinding binding;
 
     public ProfileInfoFragment() {
         // Required empty public constructor
@@ -54,6 +55,7 @@ public class ProfileInfoFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRetainInstance(true);
         User user = null;
         if (getArguments() != null) {
             user = (User) getArguments().getSerializable(ARG_PARAM_USER);
@@ -65,7 +67,7 @@ public class ProfileInfoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_profile_info, container, false);
         View view = binding.getRoot();
-        binding.setVariable(BR.viewModel, viewModel); //Why does it not generate the method?
+        binding.setViewModel(viewModel);
         return view;
     }
 
