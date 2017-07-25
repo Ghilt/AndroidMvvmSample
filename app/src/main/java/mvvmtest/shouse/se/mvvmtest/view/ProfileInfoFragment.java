@@ -66,9 +66,8 @@ public class ProfileInfoFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_profile_info, container, false);
-        View view = binding.getRoot();
         binding.setViewModel(viewModel);
-        return view;
+        return binding.getRoot();
     }
 
 
