@@ -3,7 +3,6 @@ package mvvmtest.shouse.se.mvvmtest.view;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
-import android.databinding.ViewDataBinding;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -89,14 +88,11 @@ public class IceCreamFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_ice_cream_list, container, false);
-        View view = binding.getRoot();
         binding.setViewModel(viewModel);
 
-        RecyclerView recyclerView = ((RecyclerView) view.findViewById(R.id.iceCreamListView));
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(new IceCreamAdapter(getContext(), rowViewModels));
-//        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        return view;
+        binding.iceCreamListView.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.iceCreamListView.setAdapter(new IceCreamAdapter(getContext(), rowViewModels));
+        return binding.getRoot();
     }
 
     @Override
