@@ -1,0 +1,1 @@
+Empty commit, did a rebase and changed commit messages and squashed one: https://stackoverflow.com/questions/12528854/how-to-perform-rebase-squash-using-tortoisegit
